@@ -1,0 +1,15 @@
+D:\git\internship\app\bin\Debug\net7.0\app.exe
+D:\git\internship\app\bin\Debug\net7.0\app.deps.json
+D:\git\internship\app\bin\Debug\net7.0\app.runtimeconfig.json
+D:\git\internship\app\bin\Debug\net7.0\app.dll
+D:\git\internship\app\bin\Debug\net7.0\app.pdb
+D:\git\internship\app\obj\Debug\net7.0\app.csproj.AssemblyReference.cache
+D:\git\internship\app\obj\Debug\net7.0\app.GeneratedMSBuildEditorConfig.editorconfig
+D:\git\internship\app\obj\Debug\net7.0\app.AssemblyInfoInputs.cache
+D:\git\internship\app\obj\Debug\net7.0\app.AssemblyInfo.cs
+D:\git\internship\app\obj\Debug\net7.0\app.csproj.CoreCompileInputs.cache
+D:\git\internship\app\obj\Debug\net7.0\app.dll
+D:\git\internship\app\obj\Debug\net7.0\refint\app.dll
+D:\git\internship\app\obj\Debug\net7.0\app.pdb
+D:\git\internship\app\obj\Debug\net7.0\app.genruntimeconfig.cache
+D:\git\internship\app\obj\Debug\net7.0\ref\app.dll
