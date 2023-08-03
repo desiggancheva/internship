@@ -2,6 +2,20 @@
 using System;
 //const short EARTH_GRAVITY=10;
 
+uint validation()
+{
+    uint number;
+
+         bool success = uint.TryParse(Console.ReadLine(), out number);
+         if (success)
+         {
+           return number;
+         }
+         else
+         {
+           throw new Exception("Invalid arguments") ;
+         }
+}
 void evenOrOdd()
 {
 
@@ -11,7 +25,7 @@ void evenOrOdd()
 
     if (number % 2 == 0)
     {
-        Console.WriteLine("Even {0}");
+        Console.WriteLine("Even {0}", number);
     }
     else
     {
@@ -57,7 +71,7 @@ void div7and5()
 
 void isPrime()
 {
-    uint number = uint.Parse(Console.ReadLine());
+    uint number = validation();
     bool isPrime = true;
 
     for (int i = 2; i < Math.Sqrt(number); i++)
@@ -71,11 +85,12 @@ void isPrime()
 
     Console.WriteLine(isPrime);
 }
-//sisPrime();
+
+//isPrime();
 
 void thirdBit()
 {
-    uint number = uint.Parse(Console.ReadLine());
+    uint number = validation();
     if ((number >> Constants.THEERD_BIT) % 2 != 0)
     {
         Console.WriteLine("true");
@@ -91,7 +106,7 @@ void thirdBit()
 
 void NthBits()
 {
-    uint number = uint.Parse(Console.ReadLine());
+    uint number = validation();
     int bit = int.Parse(Console.ReadLine()) - 1;
 
     if ((number >> bit) % 2 != 0)
@@ -108,7 +123,7 @@ void NthBits()
 
 void modifyBits()
 {
-    uint number = uint.Parse(Console.ReadLine());
+    uint number = validation();
     int p = int.Parse(Console.ReadLine());
     short v = short.Parse(Console.ReadLine());
 
@@ -212,7 +227,7 @@ void numbersFromOntoToN()
 
 //numbersFromOntoToN();
 
-int fib(int number)
+int fibRec(int number)
 {
     if (number == 2 || number == 3)
     {
@@ -226,14 +241,30 @@ int fib(int number)
         }
         else
         {
-            return fib(number - 1) + fib(number - 2);
+            return fibRec(number - 1) + fibRec(number - 2);
         }
 
     }
 
 }
+Console.WriteLine(fibRec( 5 ));
 
-//Console.WriteLine(fib( 45 ));
+int fibCycle(int number)
+{
+    int prevNumber = 0;
+    int nextNumber = 1;
+    int res = 0;
+    for (int i = 0; i < number - 2; i++)
+    {
+        res = prevNumber + nextNumber;
+        prevNumber = nextNumber;
+        nextNumber = res;
+    }
+
+    return res;
+}
+
+Console.WriteLine(fibCycle( 5 ));
 
 void interval()
 {
@@ -251,4 +282,4 @@ void interval()
     }
 }
 
-interval();
+//interval();
