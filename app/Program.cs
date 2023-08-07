@@ -2,8 +2,9 @@
 using System;
 //const short EARTH_GRAVITY=10;
 
-validation<T> ()
+validation<T> (string s)
 {
+    Console.WriteLine(s);
     T number;
 
     bool success = T.TryParse(Console.ReadLine(), out number);
@@ -19,8 +20,7 @@ validation<T> ()
 }
 void evenOrOdd()
 {
-    Console.WriteLine("Enter a number = ");
-    int number = int.Parse(Console.ReadLine());
+    int number = validation<int>("Enter a number = ");
     Console.WriteLine(number);
 
     if (number % 2 == 0)
@@ -35,12 +35,12 @@ void evenOrOdd()
 
 void printMoonGravity()
 {
-    float weight = float.Parse(Console.ReadLine());
+    float weight = validation<float>("Enter a number = ");
 
     while (weight < 0)
     {
         Console.WriteLine("Incorrect weight, the number must be greater than 0");
-        weight = float.Parse(Console.ReadLine());
+        weight = validation<float>("Enter a number = ");
     }
 
     float newWeight = MathF.Round(weight * Constants.MOON_EARTH_DIF_GRAVITY, 3);
@@ -51,8 +51,7 @@ void printMoonGravity()
 
 void div7and5()
 {
-    Console.WriteLine("Enter a number = ");
-    int number = int.Parse(Console.ReadLine());
+    int number = validation<int>("Enter a number = ");
 
     if (number % 5 == 0 && number % 7 == 0)
     {
@@ -68,7 +67,7 @@ void div7and5()
 
 void isPrime()
 {
-    uint number = validation<uint>();
+    uint number = validation<uint>("Enter a number = ");
     bool isPrime = true;
     int dev = 2;
 
@@ -98,7 +97,7 @@ void isPrime()
 
 void thirdBit()
 {
-    uint number = validation<uint>();
+    uint number = validation<uint>("Enter a number = ");
     if ((number >> Constants.THEERD_BIT) % 2 != 0)
     {
         Console.WriteLine("true");
@@ -114,8 +113,8 @@ void thirdBit()
 
 void NthBits()
 {
-    uint number = validation<uint>();
-    int bit = validation<int>() - 1;
+    uint number = validation<uint>("Enter a number = ");
+    int bit = validation<int>("Enter a number = ") - 1;
 
     if ((number >> bit) % 2 != 0)
     {
@@ -131,9 +130,9 @@ void NthBits()
 
 void modifyBits()
 {
-    uint number = validation<uint>();
-    int p = int.Parse(Console.ReadLine());
-    short v = short.Parse(Console.ReadLine());
+    uint number = validation<uint>("Enter a number = ");
+    int p = validation<int>("Enter a p = ");
+    short v = validation<short>("Enter a v = ");
 
     if (p < 0 || p > 64 || (v != 0 && v != 1))
     {
@@ -156,12 +155,9 @@ bool checkForInvalidInputSumOfThree(int number)
 
 void sumOf3Numbers()
 {
-    Console.WriteLine("a = ");
-    short a = short.Parse(Console.ReadLine());
-    Console.WriteLine("b = ");
-    short b = short.Parse(Console.ReadLine());
-    Console.WriteLine("c = ");
-    short c = short.Parse(Console.ReadLine());
+    short a = validation<short>("Enter a a = ");
+    short b = validation<short>("Enter a b = ");
+    short c = validation<short>("Enter a c = ");
 
     if (checkForInvalidInputSumOfThree(a) || checkForInvalidInputSumOfThree(b) || checkForInvalidInputSumOfThree(c))
     {
@@ -181,7 +177,7 @@ void sumOfNumbers(int number)
     for (int i = 0; i < number; i++)
     {
         Console.WriteLine("{0} number = ", i+1);
-        short a = short.Parse(Console.ReadLine());
+        short a = validation<short>("Enter an a = ");
         sum += a;
     }
 
@@ -191,10 +187,8 @@ void sumOfNumbers(int number)
 
 void maxOfNumbers()
 {
-    Console.WriteLine("a = ");
-    int a = int.Parse(Console.ReadLine());
-    Console.WriteLine("b = ");
-    int b = int.Parse(Console.ReadLine());
+    int a = validation<int>("Enter a a = ");
+    int b = validation<int>("Enter a b = ");
 
     if (a > b)
     {
@@ -210,12 +204,9 @@ void maxOfNumbers()
 
 void quadraticEquation()
 {
-    Console.WriteLine("a = ");
-    int a = int.Parse(Console.ReadLine());
-    Console.WriteLine("b = ");
-    int b = int.Parse(Console.ReadLine());
-    Console.WriteLine("c = ");
-    int c = int.Parse(Console.ReadLine());
+    int a = validation<int>("Enter a a = ");
+    int b = validation<int>("Enter a b = ");
+    int c = validation<int>("Enter a c = ");
 
     double d = Math.Sqrt(b * b - 4 * a * c);
     double x1 = (-b + d) / (2 * a);
@@ -229,8 +220,7 @@ void quadraticEquation()
 
 void numbersFromOntoToN()
 {
-    Console.WriteLine("N = ");
-    uint N = validation<uint>();
+    uint N = validation<uint>("Enter a number");
 
     if ((N == 0) || N > 1000)
     {
@@ -271,7 +261,7 @@ int fibCycle(int number)
     int prevNumber = 0;
     int nextNumber = 1;
     int res = 0;
-    
+
     for (int i = 0; i < number - 2; i++)
     {
         res = prevNumber + nextNumber;
@@ -286,10 +276,8 @@ Console.WriteLine(fibCycle( 5 ));
 
 void interval()
 {
-    Console.WriteLine("N = ");
-    uint N = uint.Parse(Console.ReadLine());
-    Console.WriteLine("M = ");
-    uint M = uint.Parse(Console.ReadLine());
+    uint N = validation<uint>("N = ");
+    uint M = validation<uint>("M = ");
 
     for (uint i = N; i < M; i++)
     {
