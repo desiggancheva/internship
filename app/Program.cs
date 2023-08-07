@@ -2,23 +2,23 @@
 using System;
 //const short EARTH_GRAVITY=10;
 
-uint validation()
+validation<T> ()
 {
-    uint number;
+    T number;
 
-         bool success = uint.TryParse(Console.ReadLine(), out number);
-         if (success)
-         {
-           return number;
-         }
-         else
-         {
-           throw new Exception("Invalid arguments") ;
-         }
+    bool success = T.TryParse(Console.ReadLine(), out number);
+
+    if (success)
+    {
+        return number;
+    }
+    else
+    {
+        throw new Exception("Invalid arguments");
+    }
 }
 void evenOrOdd()
 {
-
     Console.WriteLine("Enter a number = ");
     int number = int.Parse(Console.ReadLine());
     Console.WriteLine(number);
@@ -47,8 +47,6 @@ void printMoonGravity()
     Console.WriteLine(newWeight);
 }
 
-
-
 //moonGravity();
 
 void div7and5()
@@ -63,7 +61,6 @@ void div7and5()
     else
     {
         Console.WriteLine("false {0}", number);
-
     }
 }
 
@@ -71,17 +68,28 @@ void div7and5()
 
 void isPrime()
 {
-    uint number = validation();
+    uint number = validation<uint>();
     bool isPrime = true;
+    int dev = 2;
 
-    for (int i = 2; i < Math.Sqrt(number); i++)
+    while (isPrime && dev < Math.Sqrt(number))
     {
-        if (number % i == 0)
+        if (number % dev == 0)
         {
             isPrime = false;
-            break;
         }
+
+        dev++;
     }
+
+    // for (int i = 2; i < Math.Sqrt(number); i++)
+    // {
+    //     if (number % i == 0)
+    //     {
+    //         isPrime = false;
+    //         break;
+    //     }
+    // }
 
     Console.WriteLine(isPrime);
 }
@@ -90,7 +98,7 @@ void isPrime()
 
 void thirdBit()
 {
-    uint number = validation();
+    uint number = validation<uint>();
     if ((number >> Constants.THEERD_BIT) % 2 != 0)
     {
         Console.WriteLine("true");
@@ -106,8 +114,8 @@ void thirdBit()
 
 void NthBits()
 {
-    uint number = validation();
-    int bit = int.Parse(Console.ReadLine()) - 1;
+    uint number = validation<uint>();
+    int bit = validation<int>() - 1;
 
     if ((number >> bit) % 2 != 0)
     {
@@ -123,7 +131,7 @@ void NthBits()
 
 void modifyBits()
 {
-    uint number = validation();
+    uint number = validation<uint>();
     int p = int.Parse(Console.ReadLine());
     short v = short.Parse(Console.ReadLine());
 
@@ -163,6 +171,19 @@ void sumOf3Numbers()
     int sum = a + b + c;
 
     Console.WriteLine(sum);
+
+}
+
+void sumOfNumbers(int number)
+{
+    int sum = 0;
+
+    for (int i = 0; i < number; i++)
+    {
+        Console.WriteLine("{0} number = ", i+1);
+        short a = short.Parse(Console.ReadLine());
+        sum += a;
+    }
 
 }
 
@@ -209,7 +230,7 @@ void quadraticEquation()
 void numbersFromOntoToN()
 {
     Console.WriteLine("N = ");
-    uint N = uint.Parse(Console.ReadLine());
+    uint N = validation<uint>();
 
     if ((N == 0) || N > 1000)
     {
@@ -229,22 +250,18 @@ void numbersFromOntoToN()
 
 int fibRec(int number)
 {
+    int res = 0;
+
     if (number == 2 || number == 3)
     {
-        return 1;
+        res = 1;
     }
     else
     {
-        if (number == 1)
-        {
-            return 0;
-        }
-        else
-        {
-            return fibRec(number - 1) + fibRec(number - 2);
-        }
-
+        res = fibRec(number - 1) + fibRec(number - 2);
     }
+
+    return res;
 
 }
 Console.WriteLine(fibRec( 5 ));
@@ -254,6 +271,7 @@ int fibCycle(int number)
     int prevNumber = 0;
     int nextNumber = 1;
     int res = 0;
+    
     for (int i = 0; i < number - 2; i++)
     {
         res = prevNumber + nextNumber;
