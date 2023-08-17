@@ -2,7 +2,7 @@
 using System;
 //const short EARTH_GRAVITY=10;
 
-validation<T> (string s)
+T validation<T> (string s) where T : int || T : uint || T : short
 {
     Console.WriteLine(s);
     T number;
@@ -81,15 +81,6 @@ void isPrime()
         dev++;
     }
 
-    // for (int i = 2; i < Math.Sqrt(number); i++)
-    // {
-    //     if (number % i == 0)
-    //     {
-    //         isPrime = false;
-    //         break;
-    //     }
-    // }
-
     Console.WriteLine(isPrime);
 }
 
@@ -144,7 +135,6 @@ void modifyBits()
     {
         //number = (number) & (~(v<<p))
     }
-
 
 }
 
@@ -213,7 +203,6 @@ void quadraticEquation()
     double x2 = (-b - d) / (2 * a);
 
     Console.WriteLine("{0}, {1}", x1, x2);
-
 }
 
 //quadraticEquation();
