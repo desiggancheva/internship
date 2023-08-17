@@ -10,14 +10,29 @@
 
 
 //Enter numbers: 3, 4, 5
+T validation<T> (string s) where T : int || T : uint || T : short
+{
+    Console.WriteLine(s);
+    T number;
 
+    bool success = T.TryParse(Console.ReadLine(), out number);
+
+    if (success)
+    {
+        return number;
+    }
+    else
+    {
+        throw new Exception("Invalid arguments");
+    }
+}
 void MMSA()
 {
     double min = double.MaxValue;
     double max = double.MinValue;
     double sum = 0;
 
-    uint N = uint.Parse(Console.ReadLine());
+    uint N = validation<uint>(Console.ReadLine());
 
     for (int i = 0; i < N; i++)
     {
@@ -25,6 +40,7 @@ void MMSA()
         double number= double.Parse(Console.ReadLine());
 
         sum += number;
+
         if (number>max)
         {
             max = number;
@@ -40,7 +56,7 @@ void MMSA()
 
 //MMSA();
 
-int fact(int number)
+int factorization(int number)
 {
     int res = 1;
     for (int i = 1; i <= number; i++)
@@ -50,7 +66,7 @@ int fact(int number)
     return res;
 }
 
-int factRec(int number)
+int factorizationRecursive(int number)
 {
     if (number == 0)
     {
@@ -60,11 +76,17 @@ int factRec(int number)
     return number * factRec(number - 1);
 }
 
-void claculate1()
+static short MIN_OF_N = 2;
+static short MAX_OF_N = 10;
+
+static double MIN_OF_X = 0.5;
+static double MAX_OF_X = 100;
+
+void claculateFirstTask()
 {
     double res = 1;
-    int N = int.Parse(Console.ReadLine());
-    double x = double.Parse(Console.ReadLine());
+    int N = validation<int>(Console.ReadLine());
+    double x = validation<double>(Console.ReadLine());
 
     if (N < 2 || N > 10 || x < 0.5 || x > 100)
     {
@@ -74,7 +96,7 @@ void claculate1()
 
     for (int i = 1; i <= N; i++)
     {
-        res += factRec(i) / x;
+        res += factorizationRecursive(i) / x;
     }
 
     Console.WriteLine(res);
@@ -85,14 +107,14 @@ void claculate1()
 
 //claculate1(); 
 
-void calculate2()
+void calculateSecondTask()
 {
     Console.WriteLine("Enter a N = ");
-    int N = int.Parse(Console.ReadLine());
+    int N = validation<int>(Console.ReadLine());
     Console.WriteLine("Enter a K = ");
-    int K = int.Parse(Console.ReadLine());
+    int K = validation<int>(Console.ReadLine());
 
-    int res = factRec(N);  // it can be res= factRec(N) / factRec(K), but in this way there are not any loops
+    int res = factorizationRecursive(N);  // it can be res= factRec(N) / factRec(K), but in this way there are not any loops
 
     for (int i = 1; i <= K; i++)
     {
@@ -108,7 +130,7 @@ void calculate2()
 void printMatrixOfNumbers()
 {
     Console.WriteLine("Enter a N = ");
-    int N = int.Parse(Console.ReadLine());
+    int N = validation<int>(Console.ReadLine());
 
     int [ , ] matrix= new int [N, N];
 
@@ -149,9 +171,10 @@ void binaryToDecimal()
 void GCD()
 {
     Console.WriteLine("Enter an a = ");
-    int a = int.Parse(Console.ReadLine());
+    int a = validation<int>(Console.ReadLine());
     Console.WriteLine("Enter a b = ");
-    int b = int.Parse(Console.ReadLine());
+    int b = validation<int>(Console.ReadLine());
+
     if (b > a)
         {
             int temp = a;
@@ -216,6 +239,7 @@ void printMatrix(int [ , ] matrix, int size)
             {
                 Console.Write(matrix[i, j] + " ");
             }
+
             Console.WriteLine();
         }
 }
