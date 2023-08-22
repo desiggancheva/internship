@@ -155,3 +155,78 @@ string reverseSentence(string text)
 
 //Console.WriteLine(reverseSentence("C# is not C++, not PHP and not Delphi!"));
 
+string getSeriesOfLetters(string input)
+{
+    StringBuilder sb = new StringBuilder();
+    char temp = input[0];
+    sb.Append(temp);
+
+    for(int i = 1; i < input.Length; i++ )
+    {
+        if (temp != input[i])
+        {
+            temp = input[i];
+            sb.Append(temp);
+        }
+    }
+
+    return sb.ToString();
+}
+
+//Console.WriteLine(getSeriesOfLetters("aaaaabbbbbcdddeeeedssaa"));
+
+const int COUNT_OF_LETTERS = 26;
+int[] alphabet = new int[COUNT_OF_LETTERS]; // 0 is for a, 1 is for b ...
+
+int[] getLetterCount(string str)
+{
+    for (int i = 0; i < str.Length; i++)
+    {
+        alphabet[(int)str[i]-(int)'a']++;
+    }
+
+    return alphabet;
+}
+
+void printLettersCount()
+{
+    for (int i = 0; i < COUNT_OF_LETTERS; i++)
+    {
+        Console.WriteLine("{0} - {1}", (char)(i + (int)'a'), alphabet[i]);
+    }
+}
+
+//getLetterCount("aaaaabbbbbcdddeeeedssaa");
+//printLettersCount();
+
+Regex emailregex = new Regex("(?<user>[^@]+)@(?<host>.+)");
+//Match m = emailregex.Match("desi3gancheva@gmail.com");
+
+void printEmails(string input)
+{
+    string[] emails = input.Split(' ');
+    
+    for (int i = 0; i < emails.Length; i++ )
+    {
+        Match m = emailregex.Match(emails[i]);
+        
+        if(m.Success)
+        {
+            Console.WriteLine(emails[i]);
+        }
+    }
+}
+
+//printEmails("desi3gan4eva@gmail.com jsjfro ivanivanov@abv.bg rfsejkjkr patetoala@gmail.com ksfskd");
+
+string replaceTags(string input)
+{
+    string result = input.Replace("<a href", "[URL]");
+    result = result.Replace("</a>", "[/URL]");
+
+    return result;
+}
+
+//Console.WriteLine(replaceTags("<p>Please visit <a href=\"http://academy.telerik. com\">our " +
+//    "site</a> to choose a training course. Also visit <a href=\"www.devbg.org\">our forum</a>" +
+//    " to discuss the courses.</p>"));
