@@ -26,7 +26,7 @@ T validation<T> (string s) where T : int || T : uint || T : short
         throw new Exception("Invalid arguments");
     }
 }
-void MMSA()
+void printMinMaxSumAvrg()
 {
     double min = double.MaxValue;
     double max = double.MinValue;
@@ -59,6 +59,7 @@ void MMSA()
 int factorization(int number)
 {
     int res = 1;
+    
     for (int i = 1; i <= number; i++)
     {
         res *= i;
@@ -68,12 +69,15 @@ int factorization(int number)
 
 int factorizationRecursive(int number)
 {
-    if (number == 0)
+    int result = 1;
+
+    if (number != 0)
     {
-        return 1;
+       result = number * factRec(number - 1);
     }
 
-    return number * factRec(number - 1);
+    return result;
+
 }
 
 static short MIN_OF_N = 2;
@@ -88,7 +92,7 @@ void claculateFirstTask()
     int N = validation<int>(Console.ReadLine());
     double x = validation<double>(Console.ReadLine());
 
-    if (N < 2 || N > 10 || x < 0.5 || x > 100)
+    if (N < MIN_OF_N || N > MAX_OF_N || x < MIN_OF_X || x > MAX_OF_X)
     {
         Console.WriteLine("Invalid argument");
         return;
@@ -132,14 +136,11 @@ void printMatrixOfNumbers()
     Console.WriteLine("Enter a N = ");
     int N = validation<int>(Console.ReadLine());
 
-    int [ , ] matrix= new int [N, N];
-
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < N; j++)
         {
-            matrix[i,j] = i+j+1;
-            Console.Write("{0}, ",matrix[i , j]);
+            Console.Write("{0}, ", i+j+1);
         }
 
         Console.WriteLine('\n');
@@ -168,7 +169,7 @@ void binaryToDecimal()
 
 //binaryToDecimal();
 
-void GCD()
+void getGreatestCommonDivider()
 {
     Console.WriteLine("Enter an a = ");
     int a = validation<int>(Console.ReadLine());
@@ -177,9 +178,7 @@ void GCD()
 
     if (b > a)
         {
-            int temp = a;
-            a = b;
-            b = a;
+            (a, b) = (b, a);
         }
 
     while (b != 0)
