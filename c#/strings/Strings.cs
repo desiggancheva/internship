@@ -4,24 +4,29 @@ const char CLOSING_BRACET = ')';
 
 bool areBracetsCorrect(string s)
 {
-    bool areCorrect = false;
+    int count = 0;
+    int index = 0;
 
-    if (s == null)
+    if (s != null)
     {
-        areCorrect = true;
-    }
-    else
-    {
-        int countOfOpeningBracets = s.Split(OPENING_BRACET).Length - 1;
-        int countOfClosingBracets = s.Split(CLOSING_BRACET).Length - 1;
-
-        if (countOfOpeningBracets == countOfClosingBracets)
+        while(index < s.Length && count >= 0)
         {
-            areCorrect = true;
-        }
-    }
+            if (s[index] == OPENING_BRACET)
+            {
+                count++;
+            }
 
-    return areCorrect;
+            if (s[index] == CLOSING_BRACET)
+            {
+                count--;
+            }
+
+            index++;
+        }
+
+    }
+    
+    return count == 0;
 
 }
 
@@ -34,14 +39,14 @@ int countOfSubstringInString(string sts, string subStr)
     int subStrLenght = subStr.Length;
     int counter = 0;
 
-    while (beg < end)
+    while (beg < end && end < sts.Length)
     {
         if (sts.Substring(beg, subStrLenght) == subStr)
         {
             counter++;
         }
 
-        beg += 1;
+        beg++;
     }
 
     return counter;
@@ -51,36 +56,20 @@ int countOfSubstringInString(string sts, string subStr)
 
 string ParseTags(string text)
 {
-    string result = "";
-    int currentIndex = 0;
+    string result = text;
 
-        while (currentIndex < text.Length)
-        {
-            int openTagIndex = text.IndexOf("<upcase>", currentIndex, StringComparison.OrdinalIgnoreCase);
+    string pattern = @"<upcase>(.*?)<\/upcase>"; 
+    MatchCollection matches = Regex.Matches(text, pattern);
 
-            if (openTagIndex == -1)
-            {
-                result += text.Substring(currentIndex);
-                break;
-            }
+    foreach (Match match in matches)
+    {
+        string tagContent = match.Groups[1].Value;
+        string upperCaseContent = tagContent.ToUpper();
 
-            result += text.Substring(currentIndex, openTagIndex - currentIndex);
+        result = result.Replace(match.Value, upperCaseContent);
+    }
 
-            int closeTagIndex = text.IndexOf("</upcase>", openTagIndex + 8, StringComparison.OrdinalIgnoreCase);
-
-            if (closeTagIndex == -1)
-            {
-                result += text.Substring(openTagIndex);
-                break;
-            }
-
-            string tagContent = text.Substring(openTagIndex + 8, closeTagIndex - openTagIndex - 8);
-            result += tagContent.ToUpper();
-
-            currentIndex = closeTagIndex + 9;
-        }
-
-        return result;
+    return result;
 }
 
 Console.WriteLine(ParseTags("We are living in a <upcase>yellow submarine</upcase>. We don't have <upcase>anything</upcase> else."));
@@ -98,17 +87,19 @@ string EncodeDecode(string input, string key)
     return result.ToString();
 }
 
+const int NEEDED_LENGHT = 20;
+
 string task6(string str)
 {
     StringBuilder sb = new StringBuilder(str);
 
-    if (str.Length>20)
+    if (str.Length > NEEDED_LENGHT)
     {
-        sb = new StringBuilder(str.Substring(0, 20));
+        sb = new StringBuilder(str.Substring(0, NEEDED_LENGHT));
     }
     else
     {
-        for (int i = str.Length-1; i < 20; i++)
+        for (int i = str.Length-1; i < NEEDED_LENGHT; i++)
         {
             sb.Append('*');
         }
@@ -124,6 +115,7 @@ string extractSentences(string text, string subStr)
     string[] sentance = text.Split('.');
 
     StringBuilder sb = new StringBuilder();
+
     for (int i = 0; i < sentance.Length; i++)
     {
         if (sentance[i].Contains(subStr))
@@ -182,7 +174,8 @@ int[] getLetterCount(string str)
 {
     for (int i = 0; i < str.Length; i++)
     {
-        alphabet[(int)str[i]-(int)'a']++;
+        int indexOfLetter = (int)str[i]-(int)'a';
+        alphabet[indexOfLetter]++;
     }
 
     return alphabet;
