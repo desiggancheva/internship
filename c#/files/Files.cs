@@ -74,6 +74,7 @@ void saveSortedNames(string filePath, string outputPath)
     using (StreamReader reader = new StreamReader(filePath))
     {
         string line;
+        
         while ((line = reader.ReadLine()) != null)
         {
             lines.Add(line);
@@ -100,6 +101,7 @@ void replaceSubstringInFile(string filePath, string targetSubstring, string repl
     using (StreamWriter writer = new StreamWriter(tempFilePath))
     {
         string line;
+
         while ((line = reader.ReadLine()) != null)
         {
             line = line.Replace(targetSubstring, replacementSubstring);
