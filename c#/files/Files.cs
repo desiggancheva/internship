@@ -110,3 +110,51 @@ void replaceSubstringInFile(string filePath, string targetSubstring, string repl
     File.Delete(filePath);
     File.Move(tempFilePath, filePath);
 }
+
+void deleteOddLines(string filePath)
+{
+    string [] lines;
+   
+    using (StreamReader reader = new StreamReader(filePath))
+    {
+        lines = reader.ReadToEnd().Split(Environment.NewLine);
+        reader.Close();
+
+    }
+
+    using (StreamWriter writer = new StreamWriter(filePath))
+    {
+       
+        for (int i = 0; i < lines.Length; i++ )
+        {
+            if (i % 2 == 0)
+            {
+                writer.WriteLine(lines[i]);
+            }
+        }
+
+        writer.Close();
+    }
+}
+
+void removeWordsWithPrefix(string filePath, string prefix)
+{
+    string[] lines;
+
+    using (StreamReader reader = new StreamReader(filePath))
+    {
+        lines = reader.ReadToEnd().Split(' ');
+        reader.Close();
+    }
+
+    using (StreamWriter writer = new StreamWriter(filePath))
+    {
+        for (int i = 0; i < lines.Length; ++i)
+        {
+            if (!lines[i].StartsWith(prefix))
+            {
+                writer.WriteLine(lines[i]);
+            }
+        }
+    }
+}
