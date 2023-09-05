@@ -10,7 +10,7 @@
 
 
 //Enter numbers: 3, 4, 5
-T validation<T> (string s) where T : int || T : uint || T : short
+T validation<T>(string s) where T : int || T : uint || T : short
 {
     Console.WriteLine(s);
     T number;
@@ -19,8 +19,9 @@ T validation<T> (string s) where T : int || T : uint || T : short
 
     if (success)
     {
-        return number;
+         return number;
     }
+
     else
     {
         throw new Exception("Invalid arguments");
@@ -36,17 +37,17 @@ void printMinMaxSumAvrg()
 
     for (int i = 0; i < N; i++)
     {
-        Console.WriteLine("Enter number {0} :", i+1);
-        double number= double.Parse(Console.ReadLine());
+        Console.WriteLine("Enter number {0} :", i + 1);
+        double number = double.Parse(Console.ReadLine());
 
         sum += number;
 
-        if (number>max)
+        if (number > max)
         {
             max = number;
         }
 
-        if (number< min)
+        if (number < min)
         {
             min = number;
         }
@@ -59,11 +60,12 @@ void printMinMaxSumAvrg()
 int factorization(int number)
 {
     int res = 1;
-    
+
     for (int i = 1; i <= number; i++)
     {
         res *= i;
     }
+
     return res;
 }
 
@@ -73,7 +75,7 @@ int factorizationRecursive(int number)
 
     if (number != 0)
     {
-       result = number * factRec(number - 1);
+        result = number * factRec(number - 1);
     }
 
     return result;
@@ -140,19 +142,19 @@ void printMatrixOfNumbers()
     {
         for (int j = 0; j < N; j++)
         {
-            Console.Write("{0}, ", i+j+1);
+            Console.Write("{0}, ", i + j + 1);
         }
 
         Console.WriteLine('\n');
     }
-   
+
 }
 
 //printMatrixOfNumbers();
 
 void binaryToDecimal()
 {
-    string s = Console.ReadLine();  
+    string s = Console.ReadLine();
     int size = s.Length;
     long res = 0;
 
@@ -177,16 +179,17 @@ void getGreatestCommonDivider()
     int b = validation<int>(Console.ReadLine());
 
     if (b > a)
-        {
-            (a, b) = (b, a);
-        }
+    {
+        (a, b) = (b, a);
+    }
 
     while (b != 0)
-    {   
+    {
         int remainder = a % b;
         a = b;
         b = remainder;
     }
+
     Console.WriteLine(a);
 }
 //GCD();
@@ -194,53 +197,58 @@ void getGreatestCommonDivider()
 int[,] generateMatrix(int N)
 {
     int[,] matrix = new int[N, N];
-        int top = 0;
-        int bottom = N - 1;
-        int left = 0;
-        int right = N - 1;
-        int num = 1;
 
-        while (num <= N * N)
+    int top = 0;
+    int bottom = N - 1;
+    int left = 0;
+    int right = N - 1;
+    int num = 1;
+
+    while (num <= N * N)
+    {
+        for (int i = left; i <= right; i++)
         {
-            for (int i = left; i <= right; i++)
-            {
-                matrix[top, i] = num++;
-            }
-            top++;
-
-            for (int i = top; i <= bottom; i++)
-            {
-                matrix[i, right] = num++;
-            }
-            right--;
-
-            for (int i = right; i >= left; i--)
-            {
-                matrix[bottom, i] = num++;
-            }
-            bottom--;
-
-            for (int i = bottom; i >= top; i--)
-            {
-                matrix[i, left] = num++;
-            }
-            left++;
+            matrix[top, i] = num++;
         }
 
-        return matrix;
+        top++;
+
+        for (int i = top; i <= bottom; i++)
+        {
+            matrix[i, right] = num++;
+        }
+
+        right--;
+
+        for (int i = right; i >= left; i--)
+        {
+            matrix[bottom, i] = num++;
+        }
+
+        bottom--;
+
+        for (int i = bottom; i >= top; i--)
+        {
+            matrix[i, left] = num++;
+        }
+
+        left++;
+    }
+
+    return matrix;
 }
 
-void printMatrix(int [ , ] matrix, int size)
+void printMatrix(int[,] matrix, int size)
 {
     for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
         {
-            for (int j = 0; j < size; j++)
-            {
-                Console.Write(matrix[i, j] + " ");
-            }
-
-            Console.WriteLine();
+            Console.Write(matrix[i, j] + " ");
         }
+        
+        Console.WriteLine();
+    }
 }
 
 printMatrix(generateMatrix(3), 3);
