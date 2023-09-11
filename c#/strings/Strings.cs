@@ -9,7 +9,7 @@ bool areBracetsCorrect(string s)
 
     if (s != null)
     {
-        while(index < s.Length && count >= 0)
+        while (index < s.Length && count >= 0)
         {
             if (s[index] == OPENING_BRACET)
             {
@@ -36,12 +36,11 @@ int countOfSubstringInString(string sts, string subStr)
 {
     int beg = 0;
     int end = sts.Length - subStr.Length + 1;
-    int subStrLenght = subStr.Length;
     int counter = 0;
 
     while (beg < end && end < sts.Length)
     {
-        if (sts.Substring(beg, subStrLenght) == subStr)
+        if (sts.Substring(beg, subStr.Length) == subStr)
         {
             counter++;
         }
@@ -54,11 +53,11 @@ int countOfSubstringInString(string sts, string subStr)
 
 //Console.WriteLine(countOfSubstringInString("The text is as follows: We are living in an yellow submarine. We don't have anything else. inside the submarine is very tight. So we are drinking all the day. We will move out of it in 5 days.", "in"));
 
-string ParseTags(string text)
+string ParseTags(string text, string upcase)
 {
     string result = text;
 
-    string pattern = @"<upcase>(.*?)<\/upcase>"; 
+    string pattern = @"<" + upcase + ">(.*?)<\/" + upcase + ">"; 
     MatchCollection matches = Regex.Matches(text, pattern);
 
     foreach (Match match in matches)
@@ -87,19 +86,19 @@ string EncodeDecode(string input, string key)
     return result.ToString();
 }
 
-const int NEEDED_LENGHT = 20;
+const int LENGHT = 20;
 
 string task6(string str)
 {
     StringBuilder sb = new StringBuilder(str);
 
-    if (str.Length > NEEDED_LENGHT)
+    if (str.Length > LENGHT)
     {
-        sb = new StringBuilder(str.Substring(0, NEEDED_LENGHT));
+        sb = new StringBuilder(str.Substring(0, LENGHT));
     }
     else
     {
-        for (int i = str.Length-1; i < NEEDED_LENGHT; i++)
+        for (int i = str.Length-1; i < LENGHT; i++)
         {
             sb.Append('*');
         }
@@ -112,7 +111,7 @@ string task6(string str)
 
 string extractSentences(string text, string subStr)
 {
-    string[] sentance = text.Split('.');
+    string[] sentance = text.Split(". ");
 
     StringBuilder sb = new StringBuilder();
 
@@ -121,7 +120,7 @@ string extractSentences(string text, string subStr)
         if (sentance[i].Contains(subStr))
         {
             sb.Append(sentance[i]);
-            sb.Append(".");
+            sb.Append(". ");
         }
     }
 
@@ -201,9 +200,9 @@ void printEmails(string input)
     
     for (int i = 0; i < emails.Length; i++ )
     {
-        Match m = emailregex.Match(emails[i]);
+        Match matchEmail = emailregex.Match(emails[i]);
         
-        if(m.Success)
+        if (matchEmail.Success)
         {
             Console.WriteLine(emails[i]);
         }
