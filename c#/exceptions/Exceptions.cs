@@ -4,8 +4,8 @@ double getSquareRoot(int number)
 {
     double result = 0;
 
-   try
-   {
+    try
+    {
         if (number < 0)
         {
             throw new ArgumentOutOfRangeException("Invalid number");
@@ -13,20 +13,20 @@ double getSquareRoot(int number)
 
         result = Math.Sqrt(number);
 
-   }
-   catch (ArgumentOutOfRangeException ex)
-   {
+    }
+    catch (ArgumentOutOfRangeException ex)
+    {
         Console.WriteLine(ex.Message);
-   }
-   finally
-   {
+    }
+    finally
+    {
         Console.WriteLine("Good bye")
-   }
+    }
 
-   return result;
+    return result;
 }
 
-(int, int) getInterval()
+(int, int) setInterval()
 {
     int start = 0;
     int end = 0;
@@ -40,8 +40,7 @@ double getSquareRoot(int number)
         checkInput("end", ref end);
 
     }
-
-    catch (ArgumentException ex) 
+    catch (ArgumentException ex)
     {
         Console.WriteLine(ex.Message);
     }
@@ -54,38 +53,36 @@ double getSquareRoot(int number)
 const int COUNT_OF_NUMBERS = 10;
 void enterNumbers()
 {
-    (int, int) interval = getInterval();
-    int[] numbers = new int [COUNT_OF_NUMBERS];
+    (int, int) interval = setInterval();
+    int[] numbers = new int[COUNT_OF_NUMBERS];
 
-    try 
+    try
     {
-    for (int i = 0; i < COUNT_OF_NUMBERS; i++)
-    {
-        checkInput("a" + i, ref numbers[i]);
+        for (int i = 0; i < COUNT_OF_NUMBERS; i++)
+        {
+            checkInput("a" + i, ref numbers[i]);
 
             if (i == 0 && interval.Item1 > numbers[i])
             {
                 throw new InvalidOperationException("The interval range is incorrect");
             }
 
-            if (i != 0 && numbers[i-1] > numbers[i])
+            if (i != 0 && numbers[i - 1] > numbers[i])
             {
                 throw new InvalidOperationException("The interval range is incorrect");
             }
-    }
+        }
 
-        if (numbers[numbers.Length-1] < numbers[numbers.Length-2])
+        if (numbers[numbers.Length - 1] < numbers[numbers.Length - 2])
         {
             throw new InvalidOperationException("The interval range is incorrect");
         }
 
     }
-
     catch (ArgumentException ex)
     {
         Console.WriteLine(ex.Message);
     }
-
     catch (InvalidOperationException ex)
     {
         Console.WriteLine(ex.Message);
@@ -97,42 +94,36 @@ enterNumbers();
 void printFile(string filename)
 {
     try
-    { 
+    {
         if (!File.Exists(filename))
         {
-             throw new FileNotFoundException(filename + " does not exist");
+            throw new FileNotFoundException(filename + " does not exist");
         }
 
         string text = File.ReadAllText(filename);
         Console.WriteLine(text);
 
     }
-
     catch (ArgumentNullException ex)
     {
         Console.WriteLine(ex.Message);
     }
-
-    catch (ArgumentException ex) 
+    catch (ArgumentException ex)
     {
         Console.WriteLine(ex.Message);
     }
-
     catch (FileNotFoundException ex)
     {
         Console.WriteLine(ex.Message);
     }
-
     catch (DirectoryNotFoundException ex)
     {
         Console.WriteLine(ex.Message);
     }
-
     catch (SecurityException ex)
     {
         Console.WriteLine(ex.Message);
     }
-
     catch (Exception ex)
     {
         Console.WriteLine(ex.Message);
@@ -148,22 +139,18 @@ void downloadFileFromURL(string url, string directory)
         WebClient webClient = new WebClient();
         webClient.DownloadFile(url, directory);
     }
-    
     catch (ArgumentNullException ex)
     {
         Console.WriteLine(ex.Message);
     }
-
     catch (WebException ex)
     {
         Console.WriteLine(ex.Message);
     }
-
     catch (NotSupportedException ex)
     {
         Console.WriteLine(ex.Message);
     }
-
     catch (Exception ex)
     {
         Console.WriteLine(ex.Message);
