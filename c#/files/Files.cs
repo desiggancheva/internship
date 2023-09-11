@@ -74,7 +74,7 @@ void saveSortedNames(string filePath, string outputPath)
     using (StreamReader reader = new StreamReader(filePath))
     {
         string line;
-        
+
         while ((line = reader.ReadLine()) != null)
         {
             lines.Add(line);
@@ -148,6 +148,54 @@ void removeWordsWithPrefix(string filePath, string prefix)
         lines = reader.ReadToEnd().Split(' ');
         reader.Close();
     }
+
+    using (StreamWriter writer = new StreamWriter(filePath))
+    {
+        for (int i = 0; i < lines.Length; ++i)
+        {
+            if (!lines[i].StartsWith(prefix))
+            {
+                writer.WriteLine(lines[i]);
+            }
+        }
+    }
+}
+
+static string[] ReadFromFile(string filePath)
+{
+    string[] lines = null;
+
+    try
+    {
+        using (StreamReader reader = new StreamReader(filePath))
+        {
+            lines = reader.ReadToEnd().Split(' ');
+            reader.Close();
+        }
+    }
+    catch (ArgumentException ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    catch (FileNotFoundException ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    catch (SecurityException ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+
+    return lines;
+}
+
+void removeWordsWithPrefixWithoutReaderInBody(string filePath, string prefix)
+{
+    string[] lines = ReadFromFile(filePath);
 
     using (StreamWriter writer = new StreamWriter(filePath))
     {
