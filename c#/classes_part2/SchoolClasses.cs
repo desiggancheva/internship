@@ -68,6 +68,7 @@ namespace classes2
             Console.WriteLine(id);
             Console.WriteLine(fullName);
         }
+
     }
 
     public class Teacher : Person
