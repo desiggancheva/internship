@@ -14,7 +14,7 @@ static public class GSMProgram
 
     public class Battery
     {
-        private readonly BatteryType type; 
+        private readonly BatteryType type;
         private string model = " ";
         private uint hoursIdle = 0;
         private uint hoursTalk = 0;
@@ -24,9 +24,9 @@ static public class GSMProgram
         public Battery(BatteryType type, string model, uint hoursIdle, uint hoursTalk)
         {
             this.type = type;
-            this.model=model;
-            this.hoursIdle=hoursIdle;
-            this.hoursTalk=hoursTalk;
+            this.model = model;
+            this.hoursIdle = hoursIdle;
+            this.hoursTalk = hoursTalk;
         }
 
         public void printBattery()
@@ -44,8 +44,8 @@ static public class GSMProgram
 
         public Display(uint size, uint numbersOfColors)
         {
-            this.size=size;
-            this.numbersOfColors=numbersOfColors;
+            this.size = size;
+            this.numbersOfColors = numbersOfColors;
         }
 
         public void printDisplay()
@@ -53,7 +53,6 @@ static public class GSMProgram
             Console.WriteLine(size + " " + numbersOfColors + "\n");
         }
     }
-
 
     public class GSM
     {
@@ -69,27 +68,26 @@ static public class GSMProgram
 
         public GSM(string model, string manufacturer, uint price, string owner, Battery battery, Display display)
         {
-            this.model=model;
-            this.manufacturer=manufacturer;
-            this.price=price;
-            this.owner=owner;
-            this.battery=battery;
-            this.display=display;
-
+            this.model = model;
+            this.manufacturer = manufacturer;
+            this.price = price;
+            this.owner = owner;
+            this.battery = battery;
+            this.display = display;
         }
 
         public static GSM iphone4s = new GSM("iphone4s", "apple", 1200, "owner", new Battery(), new Display());
 
         public void printGSM()
         {
-            Console.WriteLine(model + " " + manufacturer + " " + price + " " + owner  + "\n");
+            Console.WriteLine(model + " " + manufacturer + " " + price + " " + owner + "\n");
             battery.printBattery();
             display.printDisplay();
         }
 
-        override public string ToString()  
+        override public string ToString()
         {
-            string result = model + " " + manufacturer + " " + price + " " + owner  + "\n";
+            string result = model + " " + manufacturer + " " + price + " " + owner + "\n";
 
             return result;
         }
@@ -104,15 +102,15 @@ static public class GSMProgram
         }
 
         public void clearCallHistory()
-        { 
-            callHistory.Clear(); 
-        }    
+        {
+            callHistory.Clear();
+        }
 
         public double calculatePrice(double pricePerMinute)
         {
             double minutes = 0;
 
-            for (int i = 0; i < callHistory.Count; i++) 
+            for (int i = 0; i < callHistory.Count; i++)
             {
                 minutes += callHistory[i].getDurationInSeconds();
             }
@@ -128,9 +126,9 @@ static public class GSMProgram
 
             for (int i = 0; i < callHistory.Count - 1; i++)
             {
-                if (callHistory[i].getDurationInSeconds()<callHistory[i+1].getDurationInSeconds())
+                if (callHistory[indexOfLongestCall].getDurationInSeconds() < callHistory[i].getDurationInSeconds())
                 {
-                    indexOfLongestCall = i + 1;
+                    indexOfLongestCall = i;
                 }
             }
 
@@ -144,7 +142,6 @@ static public class GSMProgram
                 callHistory[i].printCall();
             }
         }
-        
     }
 
     public class GSMTest
@@ -152,7 +149,7 @@ static public class GSMProgram
         private List<GSM> data = new List<GSM>();
 
         public GSMTest() { }
-        
+
         public void addGSM(GSM gsm)
         {
             data.Add(gsm);
@@ -184,11 +181,11 @@ static public class GSMProgram
 
         public Call(DateOnly date, TimeOnly time, GSM callFrom, GSM callTo, uint durationInSeconds)
         {
-            this.date=date;
-            this.time=time;
-            this.callFrom=callFrom;
-            this.callTo=callTo;
-            this.durationInSeconds=durationInSeconds;
+            this.date = date;
+            this.time = time;
+            this.callFrom = callFrom;
+            this.callTo = callTo;
+            this.durationInSeconds = durationInSeconds;
         }
 
         public Call()
@@ -219,16 +216,16 @@ static public class GSMProgram
 
         //gsm.printGSM();
 
-       //Console.WriteLine(gsm.ToString());
+        //Console.WriteLine(gsm.ToString());
 
         GSMTest test = new GSMTest();
         test.addGSM(gsm);
         test.addGSM(GSM.iphone4s);
         //test.printGSMs();
 
-        Call call = new Call(new DateOnly (2023, 9, 2), new TimeOnly(15,52), GSM.iphone4s, gsm, 569) ;
+        Call call = new Call(new DateOnly(2023, 9, 2), new TimeOnly(15, 52), GSM.iphone4s, gsm, 569);
         //TimeOnly t = new TimeOnly()
-       
+
         //call.printCall();
 
         Battery battery2 = new Battery(0, "modelBattery", 90, 50);
@@ -245,8 +242,5 @@ static public class GSMProgram
         gsm.removeLongestCall();
 
         Console.WriteLine(gsm.calculatePrice(0.37));
-
-
-
     }
 }

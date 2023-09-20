@@ -53,11 +53,10 @@ namespace classes
         {
             private LinkedList<Point> points = new LinkedList<Point>();
 
-            public void AddPoint(Point point) 
+            public void AddPoint(Point point)
             {
                 points.AddLast(point);
             }
-
         }
 
         public static class PathStorage
@@ -68,7 +67,6 @@ namespace classes
                 using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Read))
                 using (BinaryReader br = new BinaryReader(fs))
                 {
-                    
                     while (fs.Length != fs.Position)
                     {
                         int x = br.ReadInt32();
@@ -77,11 +75,9 @@ namespace classes
 
                         path.AddPoint(new Point(x, y, z));
                     }
-                        
                 }
 
                 return path;
-                
             }
         }
 
@@ -91,10 +87,10 @@ namespace classes
             int capacity = 0;
             int size = 0;
 
-            public GenericList(int capacity) 
+            public GenericList(int capacity)
             {
-               data= new T[capacity];
-               this.capacity = capacity;
+                data = new T[capacity];
+                this.capacity = capacity;
             }
 
             public void pushBack(T item)
@@ -110,10 +106,9 @@ namespace classes
                 }
 
                 data[size++] = item;
-
             }
 
-            public T getElement(int index) 
+            public T getElement(int index)
             {
                 if (index < 0 || index >= size || data == null)
                 {
@@ -121,7 +116,6 @@ namespace classes
                 }
 
                 return data[index];
-
             }
 
             public void removeElemwnt(int index)
@@ -162,8 +156,8 @@ namespace classes
                     throw new Exception();
                 }
 
-                for (int i = 0; i < size; i++) 
-                { 
+                for (int i = 0; i < size; i++)
+                {
                     if (EqualityComparer<T>.Default.Equals(data[i], item))
                     {
                         index = i;
@@ -181,11 +175,9 @@ namespace classes
                 {
                     result += data[i];
                     result += " ";
-
                 }
 
                 return result;
-                
             }
 
             void autoGrow()
@@ -215,7 +207,7 @@ namespace classes
                 {
                     if (Comparer<T>.Default.Compare(data[i], minItem) < 0)
                     {
-                       minItem = data[i];
+                        minItem = data[i];
                     }
                 }
 
@@ -249,7 +241,7 @@ namespace classes
             int rows = 0;
             int cols = 0;
 
-            public Matrix(int rows, int  cols)
+            public Matrix(int rows, int cols)
             {
                 this.rows = rows;
                 this.cols = cols;
@@ -259,41 +251,39 @@ namespace classes
 
             public Matrix(T[,] matrix, int rows, int cols)
             {
-                this.matrix=matrix;
-                this.rows=rows;
-                this.cols=cols;
+                this.matrix = matrix;
+                this.rows = rows;
+                this.cols = cols;
             }
 
-            public ref T getElementByValue(int row, int col)
+            public ref T getElementByRef(int indexOfRow, int indexOfCol)
             {
-                if (matrix == null || row > rows || col > cols)
+                if (matrix == null || indexOfRow > rows || indexOfCol > cols)
                 {
                     throw new Exception("Invalid input or the matrix is null");
                 }
 
-                return ref matrix[row, col];
+                return ref matrix[indexOfRow, indexOfCol];
             }
 
-            public  T getElement(int row, int col)
+            public T getElement(int indexOfRow, int indexOfCol)
             {
-                if (matrix == null || row > rows || col > cols)
-                {
-                    throw new Exception("Invalid input or the matrix is null");
-                }
-
-                return  matrix[row, col];
+                T elemetToReturn = getElementByRef(indexOfRow, indexOfCol);
+                
+                return elemetToReturn;
             }
 
             public static T add<T>(T number1, T number2)
             {
                 dynamic dynamic1 = number1;
                 dynamic dynamic2 = number2;
+                
                 return dynamic1 + dynamic2;
             }
 
-            static public Matrix<T> operator + (Matrix<T> lhs, Matrix<T> rhs )
+            static public Matrix<T> operator +(Matrix<T> lhs, Matrix<T> rhs)
             {
-                if ( lhs == null || rhs == null || lhs.cols != rhs.cols || lhs.rows != rhs.rows)
+                if (lhs == null || rhs == null || lhs.cols != rhs.cols || lhs.rows != rhs.rows)
                 {
                     throw new Exception("The Matrixs can not be added");
                 }
@@ -308,11 +298,10 @@ namespace classes
                     }
                 }
 
-                return result; 
-
+                return result;
             }
 
-            static public bool hasZero(Matrix<T> matrix) 
+            static public bool hasZero(Matrix<T> matrix)
             {
                 bool hasZero = false;
 
@@ -340,17 +329,13 @@ namespace classes
             }
         }
 
-       
-
-
-
         static void Main(string[] args)
         {
             GenericList<int> myGnlist = new GenericList<int>(2);
 
             myGnlist.pushBack(1);
             myGnlist.pushBack(2);
-            
+
             Console.WriteLine(myGnlist.ToString());
 
             myGnlist.pushBack(3);
@@ -359,7 +344,4 @@ namespace classes
             Console.WriteLine("{0}, {1} ", myGnlist.getMin(), myGnlist.getMax());
         }
     }
-
-
-
 }
