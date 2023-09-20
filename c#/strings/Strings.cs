@@ -167,24 +167,24 @@ string getSeriesOfLetters(string input)
 //Console.WriteLine(getSeriesOfLetters("aaaaabbbbbcdddeeeedssaa"));
 
 const int COUNT_OF_LETTERS = 26;
-int[] alphabet = new int[COUNT_OF_LETTERS]; // 0 is for a, 1 is for b ...
+int[] countOfLettersInAlphabet = new int[COUNT_OF_LETTERS]; // 0 is for a, 1 is for b ...
 
 int[] getLetterCount(string str)
 {
     for (int i = 0; i < str.Length; i++)
     {
         int indexOfLetter = (int)str[i]-(int)'a';
-        alphabet[indexOfLetter]++;
+        countOfLettersInAlphabet[indexOfLetter]++;
     }
 
-    return alphabet;
+    return countOfLettersInAlphabet;
 }
 
 void printLettersCount()
 {
     for (int i = 0; i < COUNT_OF_LETTERS; i++)
     {
-        Console.WriteLine("{0} - {1}", (char)(i + (int)'a'), alphabet[i]);
+        Console.WriteLine("{0} - {1}", (char)(i + (int)'a'), countOfLettersInAlphabet[i]);
     }
 }
 
