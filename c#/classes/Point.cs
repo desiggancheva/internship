@@ -238,27 +238,27 @@ namespace classes
         class Matrix<T>
         {
             T[,] matrix = null;
-            int rows = 0;
-            int cols = 0;
+            int countOfRows = 0;
+            int countOfCols = 0;
 
-            public Matrix(int rows, int cols)
+            public Matrix(int countOfRows, int countOfCols)
             {
-                this.rows = rows;
-                this.cols = cols;
+                this.countOfRows = countOfRows;
+                this.countOfCols = countOfCols;
 
-                matrix = new T[rows, cols];
+                matrix = new T[countOfRows, countOfCols];
             }
 
-            public Matrix(T[,] matrix, int rows, int cols)
+            public Matrix(T[,] matrix, int countOfRows, int countOfCols)
             {
                 this.matrix = matrix;
-                this.rows = rows;
-                this.cols = cols;
+                this.countOfRows = countOfRows;
+                this.countOfCols = countOfCols;
             }
 
             public ref T getElementByRef(int indexOfRow, int indexOfCol)
             {
-                if (matrix == null || indexOfRow > rows || indexOfCol > cols)
+                if (matrix == null || indexOfRow > countOfRows || indexOfCol > countOfCols)
                 {
                     throw new Exception("Invalid input or the matrix is null");
                 }
@@ -283,16 +283,16 @@ namespace classes
 
             static public Matrix<T> operator +(Matrix<T> lhs, Matrix<T> rhs)
             {
-                if (lhs == null || rhs == null || lhs.cols != rhs.cols || lhs.rows != rhs.rows)
+                if (lhs == null || rhs == null || lhs.countOfCols != rhs.countOfCols || lhs.countOfRows != rhs.countOfRows)
                 {
                     throw new Exception("The Matrixs can not be added");
                 }
 
-                Matrix<T> result = new Matrix<T>(lhs.rows, lhs.cols);
+                Matrix<T> result = new Matrix<T>(lhs.countOfRows, lhs.countOfCols);
 
-                for (int i = 0; i < lhs.rows; i++)
+                for (int i = 0; i < lhs.countOfRows; i++)
                 {
-                    for (int j = 0; j < lhs.cols; j++)
+                    for (int j = 0; j < lhs.countOfCols; j++)
                     {
                         result.getElementByValue(i, j) = add(lhs.getElement(i, j), rhs.getElement(i, j));
                     }
@@ -305,9 +305,9 @@ namespace classes
             {
                 bool hasZero = false;
 
-                for (int i = 0; i < matrix.rows && !hasZero; i++)
+                for (int i = 0; i < matrix.countOfRows && !hasZero; i++)
                 {
-                    for (int j = 0; j < matrix.cols && !hasZero; j++)
+                    for (int j = 0; j < matrix.countOfCols && !hasZero; j++)
                     {
                         if (EqualityComparer<T>.Equals(matrix.matrix[i, j], 0))
                         {
