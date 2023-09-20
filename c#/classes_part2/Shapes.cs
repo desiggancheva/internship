@@ -38,6 +38,7 @@ namespace classes2
             return width * height;
         }
     }
+    
     public class Square : Shape
     {
         public Square(uint side) : base(side, side) { }
@@ -46,5 +47,4 @@ namespace classes2
             return width * width;
         }
     }
-
 }

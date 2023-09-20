@@ -34,7 +34,6 @@ namespace classes2
                 Console.WriteLine("{0} - {1}", human.firstName, human.lastName);
             }
         }
-
     }
 
     public class Student2 : Human
@@ -91,5 +90,4 @@ namespace classes2
             }
         }
     }
-
 }

@@ -13,9 +13,9 @@ namespace classes2
 
     public enum Gender
     {
-        notDeffined,
-        female,
-        male
+        NotDeffined,
+        Female,
+        Male
     }
 
     public class Animal : ISound
@@ -36,7 +36,7 @@ namespace classes2
             this.gender = gender;
         }
 
-        virtual public void makeSound() 
+        virtual public void makeSound()
         {
             Console.WriteLine("Not specifed");
         }
@@ -63,19 +63,19 @@ namespace classes2
 
     public class Kitten : Cat
     {
-        public Kitten(string name, uint age) : base(name, age, Gender.female)
+        public Kitten(string name, uint age) : base(name, age, Gender.Female)
         { }
     }
 
     public class Tomcat : Cat
     {
-        public Tomcat(string name, uint age) : base(name, age, Gender.male)
+        public Tomcat(string name, uint age) : base(name, age, Gender.Male)
         { }
     }
 
     public class Frog : Animal
     {
-        public Frog(string name, uint age, Gender gender) : base (name, age, gender) { }
+        public Frog(string name, uint age, Gender gender) : base(name, age, gender) { }
 
         public override void makeSound()
         {
@@ -95,7 +95,7 @@ namespace classes2
 
     internal class AnimalHierachy
     {
-       List<Animal> animals = new List<Animal>();
+        List<Animal> animals = new List<Animal>();
 
         public AnimalHierachy(List<Animal> animals)
         {
@@ -104,7 +104,7 @@ namespace classes2
                 throw new ArgumentNullException("The array was null");
             }
 
-            this.animals = animals; 
+            this.animals = animals;
         }
 
         public void addAnimal(Animal toAdd)
@@ -126,6 +126,5 @@ namespace classes2
                 Console.WriteLine("{0}", animal.getName());
             }
         }
-
     }
 }

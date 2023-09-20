@@ -59,16 +59,15 @@ namespace classes2
 
         public Student(string fullName) : base(fullName)
         {
-         
+
         }
 
-        public override void print() 
+        public override void print()
         {
-           // bool boolen = (count < 1);
+            // bool boolen = (count < 1);
             Console.WriteLine(id);
             Console.WriteLine(fullName);
         }
-
     }
 
     public class Teacher : Person
@@ -76,9 +75,10 @@ namespace classes2
         Discipline[] disciplines = null;
 
         public Teacher(string fullName) : base(fullName) { }
+
         public Teacher(string name, Discipline[] disciplines) : base(name)
         {
-            this.disciplines = disciplines; 
+            this.disciplines = disciplines;
         }
 
         public void addDiscipline(Discipline toAdd)
@@ -96,12 +96,12 @@ namespace classes2
             Console.WriteLine(fullName);
             Console.WriteLine("Teaching:");
             {
-                if (disciplines == null) 
+                if (disciplines == null)
                 {
                     Console.WriteLine("Nothing");
                 }
 
-                for (int i =0; i< disciplines.Length; i++)
+                for (int i = 0; i < disciplines.Length; i++)
                 {
                     disciplines[i].printDiscipline();
                 }
@@ -115,9 +115,9 @@ namespace classes2
 
         public SchoolClass(Teacher[] teachers, Student[] students)
         {
-            if (teachers == null || students == null) 
-            { 
-                throw new ArgumentNullException(); 
+            if (teachers == null || students == null)
+            {
+                throw new ArgumentNullException();
             }
 
             this.teachers = teachers;
@@ -133,6 +133,7 @@ namespace classes2
 
             students.Append(student);
         }
+
         public void addTeacher(Teacher teacher)
         {
             if (teacher == null)
@@ -157,7 +158,6 @@ namespace classes2
                 students[i].print();
             }
         }
- 
     }
     public class School
     {
@@ -199,5 +199,4 @@ namespace classes2
             }
         }
     }
-
 }
