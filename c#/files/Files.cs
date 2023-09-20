@@ -37,7 +37,6 @@ void writeLineNumbers(string filePath, string outputPath)
             }
         }
     }
-
 }
 
 void CompareTextFiles(string filePath1, string filePath2)
@@ -90,7 +89,6 @@ void saveSortedNames(string filePath, string outputPath)
             writer.WriteLine(line);
         }
     }
-
 }
 
 void replaceSubstringInFile(string filePath, string targetSubstring, string replacementSubstring)
@@ -115,47 +113,37 @@ void replaceSubstringInFile(string filePath, string targetSubstring, string repl
 
 void deleteOddLines(string filePath)
 {
-    string [] lines;
-   
-    using (StreamReader reader = new StreamReader(filePath))
-    {
-        lines = reader.ReadToEnd().Split(Environment.NewLine);
-        reader.Close();
-
-    }
+    string[] lines = ReadFromFile(filePath);
 
     using (StreamWriter writer = new StreamWriter(filePath))
     {
-       
-        for (int i = 0; i < lines.Length; i++ )
+        for (int i = 0; i < lines.Length; i++)
         {
             if (i % 2 == 0)
             {
                 writer.WriteLine(lines[i]);
             }
         }
-
-        writer.Close();
     }
 }
 
 void removeWordsWithPrefix(string filePath, string prefix)
 {
-    string[] lines;
+    string[] words;
 
     using (StreamReader reader = new StreamReader(filePath))
     {
-        lines = reader.ReadToEnd().Split(' ');
+        words = reader.ReadToEnd().Split(' ');
         reader.Close();
     }
 
     using (StreamWriter writer = new StreamWriter(filePath))
     {
-        for (int i = 0; i < lines.Length; ++i)
+        for (int i = 0; i < words.Length; ++i)
         {
-            if (!lines[i].StartsWith(prefix))
+            if (!words[i].StartsWith(prefix))
             {
-                writer.WriteLine(lines[i]);
+                writer.WriteLine(words[i]);
             }
         }
     }
@@ -169,7 +157,7 @@ static string[] ReadFromFile(string filePath)
     {
         using (StreamReader reader = new StreamReader(filePath))
         {
-            lines = reader.ReadToEnd().Split(' ');
+            lines = reader.ReadToEnd().Split(Environment.NewLine);
             reader.Close();
         }
     }
@@ -195,15 +183,16 @@ static string[] ReadFromFile(string filePath)
 
 void removeWordsWithPrefixWithoutReaderInBody(string filePath, string prefix)
 {
-    string[] lines = ReadFromFile(filePath);
+    string[] words = ReadFromFile(filePath);
+    words = words.Split(' ');
 
     using (StreamWriter writer = new StreamWriter(filePath))
     {
-        for (int i = 0; i < lines.Length; ++i)
+        for (int i = 0; i < words.Length; ++i)
         {
-            if (!lines[i].StartsWith(prefix))
+            if (!words[i].StartsWith(prefix))
             {
-                writer.WriteLine(lines[i]);
+                writer.WriteLine(words[i]);
             }
         }
     }
